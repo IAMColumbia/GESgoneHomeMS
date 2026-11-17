@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class playerInteractor : MonoBehaviour
 {
     //vada vada
-    public float interactDistance = 3;
+    public float interactDistance = 5;
     public InputActionReference interactAction;
 
     private void OnEnable()
@@ -15,15 +15,22 @@ public class playerInteractor : MonoBehaviour
     {
         Transform camP = Camera.main.transform;
         RaycastHit raycastHitInfo;
-        bool didRaycast = Physics.Raycast(camP.position, camP.forward, out raycastHitInfo, interactDistance);
+        bool didRaycast =
+            Physics.Raycast(camP.position, camP.forward, out raycastHitInfo, interactDistance);
             //hysics.Raycast(Camera.main.transform.position, Camera.main.transform.forward,interactDistance);
             //(Camera.main.transform.position, Camera.main.transform.forward * interactDistance);
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactDistance, Color.red);
         if (didRaycast)
         {
-            string hitObjectname = raycastHitInfo.collider.gameObject.name;
-            Debug.Log("raycast hit" + hitObjectname);
-            
+            GameObject hitObject = raycastHitInfo.collider.gameObject;
+  
+            Interactable interactable = hitObject.GetComponent<Interactable>();
+
+            if (interactable != null)
+            {
+              
+
+            }
         }
 
 
